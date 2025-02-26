@@ -2,17 +2,69 @@
 
 The SOLID principles are a set of five design principles that help developers write scalable, maintainable, and robust software.
 
-1. Single Responsibility Principle (SRP).
-   => A class (or component) should have only one reason to change.
-2. Open/Closed Principle (OCP).
-   =>You should be able to add new functionality without modifying existing code.
-   =>Use composition and props instead of modifying existing logic.
-3. Liskov Substitution Principle (LSP).
-   => Objects of a subclass should be able to replace objects of the parent class without altering functionality.
-   => Derived (child) components should be interchangeable with their base (parent) components without breaking the app.
-   => Helps avoid unexpected behaviors.
-4. Interface Segregation Principle (ISP).
-5. Dependency Inversion Principle (DIP)
+1.  Single Responsibility Principle (SRP).
+    => A class (or component) should have only one reason to change.
+2.  Open/Closed Principle (OCP).
+    =>You should be able to add new functionality without modifying existing code.
+    =>Use composition and props instead of modifying existing logic.
+3.  Liskov Substitution Principle (LSP).
+    => Objects of a subclass should be able to replace objects of the parent class without altering functionality.
+    => Derived (child) components should be interchangeable with their base (parent) components without breaking the app.
+    => Helps avoid unexpected behaviors.
+    🔴 Bad Approach (Violates LSP)
+    function Animal({ sound }) {
+    return <p>{sound}</p>;
+    }
+
+    function Dog() {
+    return <p>Bark</p>; // Not using props, breaks substitution
+
+    ✅ Good Approach (Follows LSP)
+    function Animal({ sound }) {
+    return <p>{sound}</p>;
+    }
+
+    function Dog() {
+    return <Animal sound="Bark" />;
+    }
+
+4.  Interface Segregation Principle (ISP).
+    => Clients should not be forced to depend on interfaces they do not use.
+    => Components should only expose props they need.
+    => Avoid bloated props that make components hard to use.
+    🔴 Bad Approach (Violates ISP)
+    function UserProfile({ name, email, address, phone, age, avatar }) {
+    return (
+
+       <div>
+       <img src={avatar} alt={name} />
+       <h2>{name}</h2>
+       <p>{email}</p>
+       <p>{address}</p>
+       <p>{phone}</p>
+       <p>{age}</p>
+       </div>
+       );
+       }
+
+        ✅ Good Approach (Follows ISP)
+        Break it into smaller components based on needs:
+
+        function UserAvatar({ name, avatar }) {
+        return <img src={avatar} alt={name} />;
+        }
+
+        function UserInfo({ name, email }) {
+        return (
+
+        <div>
+        <h2>{name}</h2>
+        <p>{email}</p>
+        </div>
+        );
+        }
+
+5.  Dependency Inversion Principle (DIP)
 
 # Layout Pattern in React.
 
