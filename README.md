@@ -8,6 +8,9 @@ The SOLID principles are a set of five design principles that help developers wr
    =>You should be able to add new functionality without modifying existing code.
    =>Use composition and props instead of modifying existing logic.
 3. Liskov Substitution Principle (LSP).
+   => Objects of a subclass should be able to replace objects of the parent class without altering functionality.
+   => Derived (child) components should be interchangeable with their base (parent) components without breaking the app.
+   => Helps avoid unexpected behaviors.
 4. Interface Segregation Principle (ISP).
 5. Dependency Inversion Principle (DIP)
 
