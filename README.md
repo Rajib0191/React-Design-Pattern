@@ -11,60 +11,101 @@ The SOLID principles are a set of five design principles that help developers wr
     => Objects of a subclass should be able to replace objects of the parent class without altering functionality.
     => Derived (child) components should be interchangeable with their base (parent) components without breaking the app.
     => Helps avoid unexpected behaviors.
-    🔴 Bad Approach (Violates LSP)
-    function Animal({ sound }) {
-    return <p>{sound}</p>;
-    }
+    => 🔴 Bad Approach (Violates LSP)
 
-    function Dog() {
-    return <p>Bark</p>; // Not using props, breaks substitution
+        function Animal({ sound }) {
+           return <p>{sound}</p>;
+        }
 
-    ✅ Good Approach (Follows LSP)
-    function Animal({ sound }) {
-    return <p>{sound}</p>;
-    }
+        function Dog() {
+           return <p>Bark</p>; // Not using props, breaks substitution
+        }
 
-    function Dog() {
-    return <Animal sound="Bark" />;
-    }
+    => ✅ Good Approach (Follows LSP)
+
+        function Animal({ sound }) {
+            return <p>{sound}</p>;
+        }
+
+        function Dog() {
+            return <Animal sound="Bark" />;
+        }
 
 4.  Interface Segregation Principle (ISP).
     => Clients should not be forced to depend on interfaces they do not use.
     => Components should only expose props they need.
     => Avoid bloated props that make components hard to use.
-    🔴 Bad Approach (Violates ISP)
-    function UserProfile({ name, email, address, phone, age, avatar }) {
-    return (
+    => 🔴 Bad Approach (Violates ISP)
 
-       <div>
-       <img src={avatar} alt={name} />
-       <h2>{name}</h2>
-       <p>{email}</p>
-       <p>{address}</p>
-       <p>{phone}</p>
-       <p>{age}</p>
-       </div>
-       );
-       }
+        function UserProfile({ name, email, address, phone, age, avatar }) {
+            return (
+                <div>
+                <img src={avatar} alt={name} />
+                <h2>{name}</h2>
+                <p>{email}</p>
+                <p>{address}</p>
+                <p>{phone}</p>
+                <p>{age}</p>
+                </div>
+            );
+        }
 
-        ✅ Good Approach (Follows ISP)
-        Break it into smaller components based on needs:
+    => ✅ Good Approach (Follows ISP)
+    Break it into smaller components based on needs:
 
         function UserAvatar({ name, avatar }) {
-        return <img src={avatar} alt={name} />;
+            return <img src={avatar} alt={name} />;
         }
 
         function UserInfo({ name, email }) {
-        return (
-
-        <div>
-        <h2>{name}</h2>
-        <p>{email}</p>
-        </div>
-        );
+            return (
+                <div>
+                <h2>{name}</h2>
+                <p>{email}</p>
+                </div>
+            );
         }
 
 5.  Dependency Inversion Principle (DIP)
+    => High-level modules should not depend on low-level modules. Both should depend on abstractions.
+    => Don’t directly use concrete implementations; use abstractions (e.g., contexts, hooks, dependency injection).
+    => Makes it easier to swap dependencies without modifying main components.
+    => 🔴 Bad Approach (Violates DIP) – Directly using fetch inside the component:
+
+            function UserList() {
+            const [users, setUsers] = React.useState([]);
+
+                React.useEffect(() => {
+                    fetch("/api/users")
+                    .then((res) => res.json())
+                    .then(setUsers);
+                }, []);
+
+            return <ul>{users.map((user) => <li key={user.id}>{user.name}</li>)}</ul>;
+            }
+
+        🔹 Problem: The component is tightly coupled to the API.
+
+        => ✅ Good Approach (Follows DIP) – Using an abstraction (useUsers hook)
+
+        function useUsers(apiService) {
+        const [users, setUsers] = React.useState([]);
+            React.useEffect(() => {
+            apiService.getUsers().then(setUsers);
+            }, [apiService]);
+          return users;
+        }
+
+        // API Service
+        const apiService = {
+            getUsers: () => fetch("/api/users").then((res) => res.json()),
+        };
+
+        // Component using the abstraction
+        function UserList() {
+            const users = useUsers(apiService);
+            return <ul>{users.map((user) => <li key={user.id}>{user.name}</li>)}</ul>;
+        }
 
 # Layout Pattern in React.
 
