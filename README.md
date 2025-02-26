@@ -1,11 +1,26 @@
+# Solid Principal
+
+The SOLID principles are a set of five design principles that help developers write scalable, maintainable, and robust software.
+
+1. Single Responsibility Principle (SRP).
+2. Open/Closed Principle (OCP).
+3. Liskov Substitution Principle (LSP).
+4. Interface Segregation Principle (ISP).
+5. Dependency Inversion Principle (DIP)
+
+# Single Responsibility Principle (SRP).
+
+=> A class (or component) should have only one reason to change.
+
 # Layout Pattern in React.
 
 -> In React, a common way to structure layouts is by using a layout pattern where a parent component (the layout) wraps around different pages or sections of an application. This ensures reusability, consistency, and better code organization.
 
 🏆 Advantages of This Layout Pattern
-✅ Reusability: Common elements (Navbar, Sidebar) stay the same.
-✅ Better Organization: Separates layout from pages.
-✅ Easier Maintenance: Change layout once, affects all pages.
+
+1. ✅ Reusability: Common elements (Navbar, Sidebar) stay the same.
+2. ✅ Better Organization: Separates layout from pages.
+3. ✅ Easier Maintenance: Change layout once, affects all pages.
 
 # Container Pattern in React.
 
@@ -26,9 +41,10 @@ Presentational Component: Only renders UI based on props.
 5. Pages – Complete pages with actual content.
 
 Why Use Atomic Design?
-✅ Better reusability
-✅ Scalable component structure
-✅ Clear separation of concerns
-✅ Easier to maintain and update
+
+1. ✅ Better reusability
+2. ✅ Scalable component structure
+3. ✅ Clear separation of concerns
+4. ✅ Easier to maintain and update
 
 This structure makes your React components modular and reusable across the application. Let me know if you need further modifications! 🚀
