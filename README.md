@@ -143,3 +143,9 @@ Why Use Atomic Design?
 4. ✅ Easier to maintain and update
 
 This structure makes your React components modular and reusable across the application. Let me know if you need further modifications! 🚀
+
+# HOC(Higher Order Component)
+
+=> A component that return's another component.
+
+1.  HOC are just functions that return components.
